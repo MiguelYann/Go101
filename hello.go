@@ -1,42 +1,41 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
 
-import "github.com/bitfield/script"
-
-
+	"github.com/bitfield/script"
+)
 
 func main() {
 	fmt.Println("Hello World")
 	fmt.Println(add(1, 2))
 
-	aPerson := createPersonWithDefaultHobbies(18, "Yann")
+	person := createPersonWithDefaultHobbies(18, "Yann")
 
-	fmt.Println(aPerson.describePerson())
+	fmt.Println(person.describe())
 
-	executeShellScript();
+	executeShellScript()
 }
 
-func add(a, b int) (int) {
+func add(a, b int) int {
 	sum := a + b
-	return sum;
+	return sum
 }
 
 type person struct {
-	name string
-	age int
+	name    string
+	age     int
 	hobbies [2]string
 }
 
 func createPersonWithDefaultHobbies(age int, name string) *person {
-	person := person {age: age, name: name, hobbies: [2]string {"Foot", "Basket"}}
+	person := person{age: age, name: name, hobbies: [2]string{"Foot", "Basket"}}
 	return &person
 }
 
-func (p person) describePerson() string {
-	return fmt.Sprintf("My name is %s and I have %d years old" ,  p.name , p.age);
+func (p person) describe() string {
+	return fmt.Sprintf("My name is %s and I have %d years old", p.name, p.age)
 }
-
 
 func executeShellScript() {
 	script.Echo("Hello from Shell").Stdout()
